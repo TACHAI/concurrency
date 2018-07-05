@@ -1,12 +1,14 @@
-package com.tachai;
+package com.tachai.example.atomic;
 
-import com.tachai.annoations.NotThreadSafe;
+import com.tachai.annoations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Created by @Author tachai
@@ -15,15 +17,15 @@ import java.util.concurrent.Semaphore;
  * @Email 1206966083@qq.com
  */
 @Slf4j
-@NotThreadSafe
-public class ConcurrencyTest {
+@ThreadSafe
+public class AtomicExample3 {
     //请求总数
     public static int clientTotal = 5000;
 
     //同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static int count = 0;
+    public static LongAdder count = new LongAdder();
 
     public static void main(String[] args)throws Exception {
         ExecutorService excutorService = Executors.newCachedThreadPool();
@@ -54,6 +56,10 @@ public class ConcurrencyTest {
     }
 
     private static void add(){
-        count++;
+        //先做操作再得到值
+        count.increment();
+
+        //先得到值再做操作
+//        count.getAndIncrement();
     }
 }
