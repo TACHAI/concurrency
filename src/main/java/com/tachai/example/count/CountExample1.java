@@ -14,8 +14,8 @@ import java.util.concurrent.Semaphore;
  *
  * @Email 1206966083@qq.com
  */
-@Slf4j
 @NotThreadSafe
+//@Slf4j
 public class CountExample1 {
     //请求总数
     public static int clientTotal = 5000;
@@ -45,9 +45,10 @@ public class CountExample1 {
         try {
             countDownLatch.await();
             excutorService.shutdown();
-            log.info("count:{}",count);
+            System.out.println("count"+count);
+//            log.info("count:{}",count);
         }catch (Exception e){
-            log.error(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
 

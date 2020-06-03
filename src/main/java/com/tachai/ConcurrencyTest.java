@@ -45,9 +45,12 @@ public class ConcurrencyTest {
         try {
             countDownLatch.await();
             excutorService.shutdown();
-            log.info("count:{}",count);
+            System.out.println("count:"+count);
+//            log.info("count:{}",count);
         }catch (Exception e){
-            log.error(e.getMessage());
+            System.out.println(e.getMessage());
+
+//            log.error(e.getMessage());
         }
 
 
